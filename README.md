@@ -42,7 +42,8 @@ expense-tracker-amal-mohan/
 ├── style.css
 ├── script.js
 └── README.md
-AI Assistance
+```
+##AI Assistance
 
 AI tools were used as a development aid during the creation of this project.
 
