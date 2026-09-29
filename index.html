@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expro - Expense Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<noscript>
+  <div style="padding:20px;font-family:sans-serif;text-align:center;">
+    Expro needs JavaScript enabled to run. Please enable it and reload the page.
+  </div>
+</noscript>
+
+<!-- ==================== LOADING SCREEN ==================== -->
+<section id="loadingScreen" class="loading-screen">
+  <div class="loading-content">
+    <div class="brand-mark">E</div>
+    <h1>EXPRO</h1>
+    <div id="typingText" class="typing-text"></div>
+    <div class="loading-line"><span></span></div>
+  </div>
+</section>
+
+<!-- ==================== APPLICATION ==================== -->
+<div id="app" class="app hidden">
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark small">E</div>
+      <div>
+        <h1>EXPRO</h1>
+        <p>You spend. We track.</p>
+      </div>
+    </div>
+    <div id="todayDate" class="today-date"></div>
+  </header>
+
+  <main class="container">
+
+    <!-- ==================== SUMMARY ==================== -->
+    <section class="summary-grid">
+
+      <div class="summary-card income-card">
+        <div class="summary-icon" aria-hidden="true">↑</div>
+        <div>
+          <span>Total Income</span>
+          <strong id="totalIncome">₹0.00</strong>
+        </div>
+      </div>
+
+      <div class="summary-card expense-card">
+        <div class="summary-icon" aria-hidden="true">↓</div>
+        <div>
+          <span>Total Expenses</span>
+          <strong id="totalExpenses">₹0.00</strong>
+        </div>
+      </div>
+
+      <div class="summary-card balance-card">
+        <div class="summary-icon" aria-hidden="true">₹</div>
+        <div>
+          <span>Current Balance</span>
+          <strong id="currentBalance">₹0.00</strong>
+        </div>
+      </div>
+
+      <div class="summary-card avoidable-card">
+        <div class="summary-icon" aria-hidden="true">!</div>
+        <div>
+          <span>Spending That Could Have Been Avoided</span>
+          <strong id="avoidableSpending">₹0.00</strong>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==================== WORKSPACE ==================== -->
+    <section class="workspace">
+
+      <!-- ==================== ADD TRANSACTION ==================== -->
+      <div class="panel form-panel">
+        <div class="panel-heading">
+          <h2 id="formTitle">Add Transaction</h2>
+          <p>Record your income or spending.</p>
+        </div>
+
+        <div class="type-toggle" role="group" aria-label="Transaction type">
+          <button type="button" class="type-btn active" data-type="income">Income</button>
+          <button type="button" class="type-btn" data-type="expense">Expense</button>
+        </div>
+
+        <form id="transactionForm" novalidate>
+          <input type="hidden" id="editingId">
+          <input type="hidden" id="transactionType" value="income">
+
+          <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" id="amount" placeholder="Enter amount" min="0" step="0.01">
+          </div>
+
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category"></select>
+          </div>
+
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" id="date">
+          </div>
+
+<div class="form-group">
+
+    <label for="description">
+        Description
+    </label>
+
+    <input
+        type="text"
+        id="description"
+        placeholder="e.g. Monthly salary"
+        maxlength="100"
+    >
+
+</div>
+
+          <div id="formMessage" class="form-message" role="alert" aria-live="polite"></div>
+
+          <div class="form-actions">
+            <button type="submit" id="submitBtn" class="primary-btn">Add Transaction</button>
+            <button type="button" id="cancelEditBtn" class="secondary-btn hidden">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- ==================== TRANSACTIONS ==================== -->
+      <div class="panel transactions-panel">
+        <div class="transaction-heading">
+          <div>
+            <h2>Transactions</h2>
+            <p id="transactionCount">0 transactions</p>
+          </div>
+        </div>
+
+        <div class="filters">
+          <select id="typeFilter" aria-label="Filter by type">
+            <option value="all">All Types</option>
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+
+          <select id="categoryFilter" aria-label="Filter by category">
+            <option value="all">All Categories</option>
+          </select>
+
+          <input type="search" id="searchInput" placeholder="Search transactions…" aria-label="Search transactions">
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="transactionList"></tbody>
+          </table>
+
+          <div id="emptyState" class="empty-state">
+            <div class="empty-icon" aria-hidden="true">₹</div>
+            <h3 id="emptyTitle">No transactions yet</h3>
+            <p id="emptyText">Add your first transaction to get started.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>Expro Expense Tracker</footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
